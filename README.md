@@ -86,3 +86,40 @@ The Expense Tracker application applies the MVC architecture pattern as follows:
   In that tab, select the analysis time window (e.g., 'Last week')
   In the tab, click the 'Analyze' button
   If there are transactions in that time window, displays the analysis results. If not, displays an error message.
+
+# Accessibility
+
+The application supports assistive technologies (e.g., screen readers) via the Java Accessibility API.
+
+## Screen Reader Support
+
+Two improvements were implemented to improve the experience for screen reader users:
+
+### Improvement 1: Label-to-Field Association (`JLabel.setLabelFor`)
+
+In `DataPanelView` and `AnalysisPanelView`, each visible text label is associated with its corresponding interactive component using `JLabel.setLabelFor(component)`. When a screen reader focuses a text field or combo box, it reads the associated label text aloud, telling the user what to enter.
+
+- The **Amount** label is associated with the amount text field.
+- The **Category** label is associated with the category text field.
+- The **Analysis Time Window** label is associated with the time-window combo box.
+
+### Improvement 2: Accessible Names, Descriptions, and Tooltips on All Interactive Components
+
+Every interactive UI component now has an accessible name (read aloud when focused) and an accessible description (read aloud as additional context), set via `component.getAccessibleContext().setAccessibleName(...)` and `.setAccessibleDescription(...)`. Tooltip text is also set on each component so the descriptions are available via the mouse as well.
+
+Components updated:
+- **Amount field** — announces expected input range
+- **Category field** — announces valid category values
+- **Add Transaction button** — describes its action
+- **Transactions table** — describes columns and how to delete a row
+- **Time Window combo box** — lists available time window options
+- **Analyze button** — describes what it does
+- **Analysis status label** — identified as a status/error region
+- **File > Open File...** menu item — describes its action
+- **File > Save As...** menu item — describes its action
+- **Edit > Delete** menu item — describes its action
+- **Tabbed pane** — describes the two tabs and their purpose
+
+## Testing with a Screen Reader
+
+To test with a screen reader on Windows, enable **Narrator** (Win + Ctrl + Enter) and tab through the application. Each focusable component will be announced with its name and description.

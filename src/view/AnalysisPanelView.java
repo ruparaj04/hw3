@@ -52,8 +52,24 @@ public class AnalysisPanelView extends JPanel
 		for (int i = 0; i < timeWindows.length; i++) {
 			this.timeWindowChooser.addItem(timeWindows[i]);
 		}
+		// Improvement 1: Associate a label with the combo box so screen readers
+		// announce its purpose when it receives focus.
+		JLabel timeWindowLabel = new JLabel("Analysis Time Window:");
+		timeWindowLabel.setLabelFor(this.timeWindowChooser);
+		// Improvement 2: Add accessible name, description, and tooltip to the
+		// combo box so screen readers can convey its role and options.
+		this.timeWindowChooser.getAccessibleContext().setAccessibleName("Analysis Time Window");
+		this.timeWindowChooser.getAccessibleContext().setAccessibleDescription(
+		    "Select the time window for analysis: All, Last year, or Last week.");
+		this.timeWindowChooser.setToolTipText("Select the time window for analysis (All, Last year, Last week)");
+		inputPanel.add(timeWindowLabel);
 		inputPanel.add(this.timeWindowChooser);
 		this.analyzeButton = new JButton("Analyze");
+		// Improvement 2: Add accessible name, description, and tooltip to the button.
+		this.analyzeButton.getAccessibleContext().setAccessibleName("Analyze");
+		this.analyzeButton.getAccessibleContext().setAccessibleDescription(
+		    "Click to perform data analysis for the selected time window and display a bar chart.");
+		this.analyzeButton.setToolTipText("Run analysis for the selected time window");
 		inputPanel.add(this.analyzeButton);
 		this.dataVizPanel.add(inputPanel);
 		
@@ -62,6 +78,11 @@ public class AnalysisPanelView extends JPanel
 		this.messageLabel = new JLabel("");
 		this.messageLabel.setForeground(Color.red);
 		this.messageLabel.setVisible(false);
+		// Improvement 2: Give the status/error label an accessible name so that
+		// screen readers identify it as a status message.
+		this.messageLabel.getAccessibleContext().setAccessibleName("Analysis Status");
+		this.messageLabel.getAccessibleContext().setAccessibleDescription(
+		    "Displays an error or status message after clicking the Analyze button.");
 		messagePanel.add(this.messageLabel);
 		
 		setLayout(new BorderLayout());
