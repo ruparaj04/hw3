@@ -1,0 +1,18 @@
+2026-05-03 16:23:55 [INFO] controller.ExpenseTrackerController.addTransaction() - Attempting to add transaction
+2026-05-03 16:23:55 [DEBUG] controller.ExpenseTrackerController.addTransaction() - Transaction input received: amount=200.0, category=travel
+2026-05-03 16:23:55 [INFO] controller.ExpenseTrackerController.addTransaction() - Transaction added successfully
+2026-05-03 16:24:04 [INFO] controller.ExpenseTrackerController.addTransaction() - Attempting to add transaction
+2026-05-03 16:24:04 [DEBUG] controller.ExpenseTrackerController.addTransaction() - Transaction input received: amount=75.0, category=food
+2026-05-03 16:24:04 [INFO] controller.ExpenseTrackerController.addTransaction() - Transaction added successfully
+2026-05-03 16:24:13 [INFO] controller.ExpenseTrackerController.addTransaction() - Attempting to add transaction
+2026-05-03 16:24:13 [DEBUG] controller.ExpenseTrackerController.addTransaction() - Transaction input received: amount=50.0, category=entertainment
+2026-05-03 16:24:13 [INFO] controller.ExpenseTrackerController.addTransaction() - Transaction added successfully
+2026-05-03 16:24:18 [INFO] controller.ExpenseTrackerController.delete() - Attempting to delete transaction
+2026-05-03 16:24:18 [DEBUG] controller.ExpenseTrackerController.delete() - Selected transaction ID: 0
+2026-05-03 16:24:18 [INFO] controller.ExpenseTrackerController.delete() - Transaction deleted successfully
+2026-05-03 16:24:24 [INFO] controller.ExpenseTrackerController.performDataAnalysis() - Analyze button clicked
+2026-05-03 16:24:24 [INFO] view.AnalysisPanelView.performDataAnalysis() - Starting data analysis
+2026-05-03 16:24:24 [INFO] view.AnalysisPanelView.performDataAnalysis() - Transaction count: 2
+2026-05-03 16:24:24 [INFO] view.AnalysisPanelView.performDataAnalysis() - Chart created successfully
+2026-05-03 16:24:24 [INFO] view.AnalysisPanelView.performDataAnalysis() - Data visualization updated
+2026-05-03 16:24:24 [INFO] controller.ExpenseTrackerController.performDataAnalysis() - Data analysis request completed

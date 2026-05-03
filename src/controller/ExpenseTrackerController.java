@@ -1,5 +1,6 @@
 package controller;
 
+import org.tinylog.Logger;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -66,36 +67,63 @@ public class ExpenseTrackerController {
     }
     
     public void addTransaction() { 
-    	try {
-    		// Get transaction data from view
-    		double amount = view.getDataPanelView().getAmount(); 
-    		String category = view.getDataPanelView().getCategory();
+	try {
 
-    		// Create transaction object
-    		Transaction t = new Transaction(amount, category);
+		Logger.info("Attempting to add transaction");
 
-    		// Call controller to add transaction
-    		model.addTransaction(t);
-    		view.refresh();
-    	}
-    	catch (NumberFormatException nfe) {
-    		view.displayErrorMessage("The amount cannot be parsed as a double number.");
-    	}
-    	catch (IllegalArgumentException iae) {
-    		view.displayErrorMessage(iae.getMessage());
-    	}
-    }
+		// Get transaction data from view
+		double amount = view.getDataPanelView().getAmount(); 
+		String category = view.getDataPanelView().getCategory();
+
+		Logger.debug("Transaction input received: amount={}, category={}", amount, category);
+
+		// Create transaction object
+		Transaction t = new Transaction(amount, category);
+
+		// Call controller to add transaction
+		model.addTransaction(t);
+
+		Logger.info("Transaction added successfully");
+
+		view.refresh();
+	}
+	catch (NumberFormatException nfe) {
+
+		Logger.warn("Failed to add transaction because amount could not be parsed");
+
+		view.displayErrorMessage("The amount cannot be parsed as a double number.");
+	}
+	catch (IllegalArgumentException iae) {
+
+		Logger.warn("Failed to add transaction: {}", iae.getMessage());
+
+		view.displayErrorMessage(iae.getMessage());
+	}
+}
     
     public void delete() {
-        int selectedTransactionID = view.getDataPanelView().getSelectedTransactionID();
-    	boolean removed = model.removeTransaction(selectedTransactionID);
-    	if (! removed) {
-    		view.displayErrorMessage("A valid transaction was not selected to be removed.");
-    	}
-    	else {
-    		view.refresh();
-    	}
-    }
+
+		Logger.info("Attempting to delete transaction");
+
+    	int selectedTransactionID = view.getDataPanelView().getSelectedTransactionID();
+
+		Logger.debug("Selected transaction ID: {}", selectedTransactionID);
+
+		boolean removed = model.removeTransaction(selectedTransactionID);
+
+		if (! removed) {
+
+			Logger.warn("Transaction deletion failed because no valid transaction was selected");
+
+			view.displayErrorMessage("A valid transaction was not selected to be removed.");
+		}
+		else {
+
+			Logger.info("Transaction deleted successfully");
+
+			view.refresh();
+		}
+	}
     
     public void openFile() {
     	String inputFileName = view.showFileChooser(true);
@@ -131,6 +159,11 @@ public class ExpenseTrackerController {
     }
     
     public void performDataAnalysis() {
-    	view.getAnalysisPanelView().performDataAnalysis(model);
-    }
+
+		Logger.info("Analyze button clicked");
+
+		view.getAnalysisPanelView().performDataAnalysis(model);
+
+		Logger.info("Data analysis request completed");
+	}
 }

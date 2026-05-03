@@ -25,6 +25,8 @@ import org.knowm.xchart.XChartPanel;
 import model.ExpenseTrackerModel;
 import model.InputValidation;
 
+import org.tinylog.Logger;
+
 /**
  * The AnalsisPanelView class supports performing data analysis on the model
  * and displaying the data analysis results to the user.
@@ -177,33 +179,57 @@ public class AnalysisPanelView extends JPanel
 	}
 
 	/**
-	 * Performs data analysis on the given model and 
-	 * visualizes the data analysis results.
-	 * 
-	 * @param model Represents the model's current state
-	 */
+ 	* Performs data analysis on the given model and 
+ 	* visualizes the data analysis results.
+ 	* 
+ 	* @param model Represents the model's current state
+ 	*/
 	public void performDataAnalysis(ExpenseTrackerModel model) {
+
+		Logger.info("Starting data analysis");
+
 		if (model.getTransactions().isEmpty()) {
+
+			Logger.warn("Analysis failed because there are no transactions");
+
 			this.messageLabel.setText(NO_TRANSACTIONS_ERROR_MESSAGE);
 			this.messageLabel.setVisible(true);
 		}
 		else {
+
+			Logger.info("Transaction count: {}", model.getTransactions().size());
+
 			this.messageLabel.setText("");
 			this.messageLabel.setVisible(false);
+
 			if (this.chartPanel != null) {
+
+				Logger.debug("Removing existing chart panel");
+
 				this.dataVizPanel.remove(this.chartPanel);
 				this.chartPanel = null;
 			}
+
 			CategoryChart categoryChart = this.createCategoryChart(model);
+
 			if (categoryChart == null) {
+
+				Logger.warn("Chart creation failed because no data matched selected time window");
+
 				this.messageLabel.setText(NO_TRANSACTIONS_ERROR_MESSAGE);
 				this.messageLabel.setVisible(true);				
 			}
 			else {
+
+				Logger.info("Chart created successfully");
+
 				this.chartPanel = new XChartPanel<>(categoryChart);
 				this.dataVizPanel.add(this.chartPanel, BorderLayout.CENTER);
+
 				this.dataVizPanel.revalidate();
 				this.dataVizPanel.repaint();
+
+				Logger.info("Data visualization updated");
 			}
 		}
 	}
