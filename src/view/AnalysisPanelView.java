@@ -187,6 +187,7 @@ public class AnalysisPanelView extends JPanel
 	public void performDataAnalysis(ExpenseTrackerModel model) {
 
 		Logger.info("Starting data analysis");
+		Logger.info("Selected time window: {}", this.timeWindowChooser.getSelectedItem());
 
 		if (model.getTransactions().isEmpty()) {
 

@@ -120,6 +120,32 @@ Components updated:
 - **Edit > Delete** menu item — describes its action
 - **Tabbed pane** — describes the two tabs and their purpose
 
-## Testing with a Screen Reader
 
-To test with a screen reader on Windows, enable **Narrator** (Win + Ctrl + Enter) and tab through the application. Each focusable component will be announced with its name and description.
+# Logging
+
+The application uses the [tinylog 2.7.0](https://www.tinylog.org/) library for structured runtime logging.
+
+## Configuration
+
+Logging is configured in `tinylog.properties` at the project root. Log output is written to:
+- **Console** — all log levels are printed to standard output while the app is running.
+- **File** — `logs/expense-tracker.log` — debug-level and above; the file is overwritten on each run (`append = false`).
+
+Log entries follow the format:
+```
+{date: yyyy-MM-dd HH:mm:ss} [{level}] {class}.{method}() - {message}
+```
+
+## Logging Strategy
+
+Logging statements were added to `ExpenseTrackerController` and `AnalysisPanelView` using three levels:
+
+| Level | What is logged |
+|-------|----------------|
+| `INFO` | Major user actions: transaction added/deleted, analysis started/completed |
+| `DEBUG` | Internal state details: input values (amount, category), selected row ID |
+| `WARN` | Invalid or failed operations: unparseable amount, invalid category, no transactions to analyze |
+
+## Log Location
+
+The runtime log is written to `logs/expense-tracker.log`. A sample log covering the standard usage scenario (add three transactions, delete one, analyze with Last week window) is committed in that file.

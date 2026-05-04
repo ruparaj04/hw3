@@ -12,6 +12,7 @@
 2026-05-03 16:24:18 [INFO] controller.ExpenseTrackerController.delete() - Transaction deleted successfully
 2026-05-03 16:24:24 [INFO] controller.ExpenseTrackerController.performDataAnalysis() - Analyze button clicked
 2026-05-03 16:24:24 [INFO] view.AnalysisPanelView.performDataAnalysis() - Starting data analysis
+2026-05-03 16:24:24 [INFO] view.AnalysisPanelView.performDataAnalysis() - Selected time window: Last week
 2026-05-03 16:24:24 [INFO] view.AnalysisPanelView.performDataAnalysis() - Transaction count: 2
 2026-05-03 16:24:24 [INFO] view.AnalysisPanelView.performDataAnalysis() - Chart created successfully
 2026-05-03 16:24:24 [INFO] view.AnalysisPanelView.performDataAnalysis() - Data visualization updated
